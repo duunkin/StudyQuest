@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["displayName", "createdAt"]
+    },
+    "UserStats": {
+      "title": "UserStats",
+      "description": "User gamification statistics",
+      "type": "object",
+      "properties": {
+        "totalExp": { "type": "number" },
+        "level": { "type": "number" },
+        "streakDays": { "type": "number" },
+        "lastActiveDate": { "type": "string" }
+      },
+      "required": ["totalExp", "level", "streakDays", "lastActiveDate"]
+    },
+    "StudyTask": {
+      "title": "StudyTask",
+      "description": "Study task entity",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 200 },
+        "subjectCode": { "type": "string", "enum": ["tin", "su", "dia", "ly", "toan", "hoa", "sinh", "van", "anh", "khac"] },
+        "track": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["pending", "done"] },
+        "plannedDate": { "type": "string" },
+        "durationMins": { "type": "number" },
+        "estMins": { "type": "number" },
+        "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+        "listKey": { "type": "string", "enum": ["school", "hsg_cpp", "group_project"] },
+        "notes": { "type": "string", "maxLength": 500 },
+        "reasonMissed": { "type": "string", "maxLength": 500 },
+        "sourceTaskId": { "type": "string", "maxLength": 100 },
+        "clientId": { "type": "string", "maxLength": 100 },
+        "origin": { "type": "string", "enum": ["manual", "ai_plan"] },
+        "syncStatus": { "type": "string", "enum": ["not_synced", "synced", "failed"] },
+        "googleTaskId": { "type": "string", "maxLength": 100 },
+        "completedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "subjectCode", "status", "plannedDate", "priority", "listKey", "origin", "syncStatus", "createdAt"]
+    },
+    "DailyReport": {
+      "title": "DailyReport",
+      "description": "Exported daily report",
+      "type": "object",
+      "properties": {
+        "report": { "type": "object" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["report", "createdAt"]
+    },
+    "AiPlan": {
+      "title": "AiPlan",
+      "description": "Applied AI planning object",
+      "type": "object",
+      "properties": {
+        "rawJson": { "type": "string" },
+        "aiInsight": { "type": "string", "maxLength": 500 },
+        "targetDate": { "type": "string" },
+        "inResponseTo": { "type": "string", "maxLength": 100 },
+        "appliedAt": { "type": "string" }
+      },
+      "required": ["rawJson", "aiInsight", "targetDate", "inResponseTo", "appliedAt"]
+    },
+    "Milestone": {
+      "title": "Milestone",
+      "description": "Exam or deadline milestone",
+      "type": "object",
+      "properties": {
+        "event": { "type": "string", "maxLength": 200 },
+        "date": { "type": "string" }
+      },
+      "required": ["event", "date"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/profile": {
+      "schema": "UserProfile",
+      "description": "User profile doc"
+    },
+    "/users/{userId}/stats/main": {
+      "schema": "UserStats",
+      "description": "Main gamification statistics doc"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "StudyTask",
+      "description": "Collection of tasks"
+    },
+    "/users/{userId}/reports/{reportId}": {
+      "schema": "DailyReport",
+      "description": "Collection of exported daily reports"
+    },
+    "/users/{userId}/plans/{planId}": {
+      "schema": "AiPlan",
+      "description": "Collection of imported AI plans"
+    },
+    "/users/{userId}/milestones/{milestoneId}": {
+      "schema": "Milestone",
+      "description": "Collection of academic milestones"
+    }
+  }
+}

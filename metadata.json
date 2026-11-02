@@ -1,0 +1,6 @@
+{
+  "name": "StudyQuest - Theo dõi học tập cá nhân",
+  "description": "Ứng dụng theo dõi tiến độ học tập, điểm kinh nghiệm, chuỗi ngày học và đồng bộ kế hoạch học tập cùng AI dành cho học sinh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
